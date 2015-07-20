@@ -1,0 +1,98 @@
+
+A.o:     формат файла pe-i386
+
+Содержимое раздела .text:
+ 0000 5589e583 ec288d45 f7890424 e8000000  U....(.E...$....
+ 0010 00c9c355 89e583ec 288d45f7 890424e8  ...U....(.E...$.
+ 0020 00000000 c9c35589 e583ec28 8d45f789  ......U....(.E..
+ 0030 0424e800 000000c9 c3909090           .$..........    
+Содержимое раздела .rdata:
+ 0000 44454e44 4900412e 63707000           DENDI.A.cpp.    
+Содержимое раздела .text$_ZN5DENDI3fooEv:
+ 0000 5589e583 ec18c704 24000000 00e80000  U.......$.......
+ 0010 0000c9c3                             ....            
+Содержимое раздела .text$_ZN1S3fooEv:
+ 0000 5589e583 ec18c704 24060000 00e80000  U.......$.......
+ 0010 0000c9c3                             ....            
+Содержимое раздела .rdata$zzz:
+ 0000 4743433a 2028474e 55292034 2e392e33  GCC: (GNU) 4.9.3
+ 0010 00000000                             ....            
+Содержимое раздела .eh_frame$_ZN5DENDI3fooEv:
+ 0000 14000000 00000000 017a5200 017c0801  .........zR..|..
+ 0010 1b0c0404 88010000 1c000000 1c000000  ................
+ 0020 04000000 14000000 00410e08 8502420d  .........A....B.
+ 0030 0550c50c 04040000                    .P......        
+Содержимое раздела .eh_frame$_ZN1S3fooEv:
+ 0000 14000000 00000000 017a5200 017c0801  .........zR..|..
+ 0010 1b0c0404 88010000 1c000000 1c000000  ................
+ 0020 04000000 14000000 00410e08 8502420d  .........A....B.
+ 0030 0550c50c 04040000                    .P......        
+Содержимое раздела .eh_frame:
+ 0000 14000000 00000000 017a5200 017c0801  .........zR..|..
+ 0010 1b0c0404 88010000 1c000000 1c000000  ................
+ 0020 04000000 13000000 00410e08 8502420d  .........A....B.
+ 0030 054fc50c 04040000 1c000000 3c000000  .O..........<...
+ 0040 17000000 13000000 00410e08 8502420d  .........A....B.
+ 0050 054fc50c 04040000 1c000000 5c000000  .O..........\...
+ 0060 2a000000 13000000 00410e08 8502420d  *........A....B.
+ 0070 054fc50c 04040000                    .O......        
+
+A.o:     формат файла pe-i386
+
+SYMBOL TABLE:
+[  0](sec -2)(fl 0x00)(ty   0)(scl 103) (nx 1) 0x00000000 A.cpp
+File 
+[  2](sec  5)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .text$_ZN5DENDI3fooEv
+AUX scnlen 0x14 nreloc 2 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  4](sec  5)(fl 0x00)(ty  20)(scl   2) (nx 1) 0x00000000 __ZN5DENDI3fooEv
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[  6](sec  6)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .text$_ZN1S3fooEv
+AUX scnlen 0x14 nreloc 2 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  8](sec  6)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 __ZN1S3fooEv
+[  9](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 __Z7foobar2v
+[ 10](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000013 __Z6foobarv
+[ 11](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000026 __Z4fooAv
+[ 12](sec  1)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .text
+AUX scnlen 0x39 nreloc 3 nlnno 0
+[ 14](sec  2)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .data
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 16](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 18](sec  4)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .rdata
+AUX scnlen 0xc nreloc 0 nlnno 0
+[ 20](sec  7)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .rdata$zzz
+AUX scnlen 0x11 nreloc 0 nlnno 0
+[ 22](sec  8)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .eh_frame$_ZN5DENDI3fooEv
+AUX scnlen 0x38 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 24](sec  9)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .eh_frame$_ZN1S3fooEv
+AUX scnlen 0x38 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 26](sec 10)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x00000000 .eh_frame
+AUX scnlen 0x78 nreloc 3 nlnno 0
+[ 28](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000 _puts
+
+
+
+A.o:     формат файла pe-i386
+
+Разделы:
+Инд Имя           Размер    VMA       LMA       Файл      Вырав
+  0 .text         0000003c  00000000  00000000  000001a4  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000000  2**2
+                  ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000000  2**2
+                  ALLOC
+  3 .rdata        0000000c  00000000  00000000  000001e0  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .text$_ZN5DENDI3fooEv 00000014  00000000  00000000  000001ec  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT __ZN5DENDI3fooEv 4)
+  5 .text$_ZN1S3fooEv 00000014  00000000  00000000  00000200  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE, LINK_ONCE_DISCARD (COMDAT __ZN1S3fooEv 8)
+  6 .rdata$zzz    00000014  00000000  00000000  00000214  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  7 .eh_frame$_ZN5DENDI3fooEv 00000038  00000000  00000000  00000228  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD
+  8 .eh_frame$_ZN1S3fooEv 00000038  00000000  00000000  00000260  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA, LINK_ONCE_DISCARD
+  9 .eh_frame     00000078  00000000  00000000  00000298  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
