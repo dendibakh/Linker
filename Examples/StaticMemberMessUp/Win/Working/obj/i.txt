@@ -1,0 +1,118 @@
+Microsoft (R) COFF/PE Dumper Version 12.00.21005.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file C:\staticMemberMessUp_Lib_Working\obj\simpleExample.exe
+
+File Type: EXECUTABLE IMAGE
+
+  Section contains the following imports:
+
+    libsharedLib.so
+                408284 Import Address Table
+                408064 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           0 _Z8main_DLLv
+                           1 _ZN7Counter8getCountEv
+                           2 _ZN7CounterC1Ev
+
+    KERNEL32.dll
+                4082A4 Import Address Table
+                408084 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          D8 DeleteCriticalSection
+                          F8 EnterCriticalSection
+                         1CD GetCurrentProcess
+                         1CE GetCurrentProcessId
+                         1D2 GetCurrentThreadId
+                         210 GetLastError
+                         224 GetModuleHandleA
+                         256 GetProcAddress
+                         273 GetStartupInfoA
+                         28A GetSystemTimeAsFileTime
+                         2A5 GetTickCount
+                         2F9 InitializeCriticalSection
+                         34B LeaveCriticalSection
+                         3BB QueryPerformanceCounter
+                         401 RtlAddFunctionTable
+                         402 RtlCaptureContext
+                         409 RtlLookupFunctionEntry
+                         410 RtlVirtualUnwind
+                         49F SetUnhandledExceptionFilter
+                         4AC Sleep
+                         4BA TerminateProcess
+                         4C1 TlsGetValue
+                         4CE UnhandledExceptionFilter
+                         4EC VirtualProtect
+                         4EE VirtualQuery
+
+    msvcrt.dll
+                408374 Import Address Table
+                408154 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          37 __C_specific_handler
+                          4E __dllonexit
+                          51 __getmainargs
+                          52 __initenv
+                          53 __iob_func
+                          5A __lconv_init
+                          60 __set_app_type
+                          62 __setusermatherr
+                          73 _acmdln
+                          7A _amsg_exit
+                          8C _cexit
+                          FB _fmode
+                         14A _initterm
+                         1B7 _lock
+                         263 _onexit
+                         333 _unlock
+                         406 abort
+                         417 calloc
+                         424 exit
+                         437 fprintf
+                         43E free
+                         449 fwrite
+                         479 malloc
+                         481 memcpy
+                         49F signal
+                         4B4 strlen
+                         4B7 strncmp
+                         4D7 vfprintf
+
+    libstdc++-6.dll
+                40845C Import Address Table
+                40823C Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                         6C2 _ZNSolsEPFRSoS_E
+                         6C5 _ZNSolsEPKv
+                         6CB _ZNSolsEi
+                        1145 _ZNSt8ios_base4InitC1Ev
+                        1147 _ZNSt8ios_base4InitD1Ev
+                        1264 _ZSt4cout
+                        1265 _ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_
+                        12D1 _ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
+
+  Summary
+
+        1000 .CRT
+        1000 .bss
+        1000 .data
+        1000 .debug_abbrev
+        1000 .debug_aranges
+        1000 .debug_frame
+        1000 .debug_info
+        1000 .debug_line
+        1000 .idata
+        1000 .pdata
+        1000 .rdata
+        2000 .text
+        1000 .tls
+        1000 .xdata
