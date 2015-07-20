@@ -9,7 +9,7 @@ struct Counter
 
     static int& getCount()
     {
-        static int counter = 0;
+        static int counter = 1234;
         return counter;
     }
 };
