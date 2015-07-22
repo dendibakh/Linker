@@ -1,3 +1,3 @@
 #include "Counter.h"
 
-static Counter B;
+static Counter A;

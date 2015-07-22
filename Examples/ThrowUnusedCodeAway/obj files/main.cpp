@@ -1,7 +1,7 @@
 #include "Counter.h"
-#include <stdio.h>
+#include <iostream>
 
 int main()
 {
-    printf("%d\n", Counter::count);
+    std::cout << Counter::count << std::endl;
 }

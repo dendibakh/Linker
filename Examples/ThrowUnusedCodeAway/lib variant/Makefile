@@ -32,8 +32,9 @@ build_static_lib:
 	$(ARCHIVE_TOOL) rcs $(OBJ_DIR)lib$(LIB_NAME).a $(EXE_OBJECTS)
 
 executable:
+	#$(BUILD_TOOL) -I$(SOURCES_DIR) -o $(OBJ_DIR)$(EXE_NAME) main.cpp -L$(OBJ_DIR) -l$(LIB_NAME)
 	#$(BUILD_TOOL) -I$(SOURCES_DIR) -o $(OBJ_DIR)$(EXE_NAME) main.cpp -L$(OBJ_DIR) -l$(LIB_NAME) ./obj/A.o
-	$(BUILD_TOOL) -I$(SOURCES_DIR) -o $(OBJ_DIR)$(EXE_NAME) main.cpp -Wl,--whole-archive -L$(OBJ_DIR) -l$(LIB_NAME) -Wl,-no-whole-archive
+	$(BUILD_TOOL) -I$(SOURCES_DIR) -o $(OBJ_DIR)$(EXE_NAME) main.cpp -L$(OBJ_DIR) -Wl,--whole-archive -l$(LIB_NAME) -Wl,-no-whole-archive
                    
 run:
 	$(OBJ_DIR)$(EXE_NAME)
