@@ -4,8 +4,12 @@ struct Counter
 {
     Counter()
     { 
-        ++counter;
+        ++getCount();
     }
 
-    static int counter;
+    static int& getCount()
+    {
+        static int counter = 0;
+        return counter;
+    }
 };

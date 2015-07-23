@@ -9,6 +9,4 @@ int main()
     main_DLL();
     Counter c;
     std::cout << "main_EXE : ptr = " << &c.getCount() << " value = " << c.getCount() << std::endl;
-    
-    //main_DLL();
 }

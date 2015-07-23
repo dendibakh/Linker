@@ -33,10 +33,11 @@ build_shared_lib:
 	$(BUILD_TOOL) $(BUILD_SHARED_LIBRARY_FLAGS) -fPIC -o $(OBJ_DIR)lib$(SHARED_LIB_NAME).so $(SHARED_OBJECTS)
 
 executable:
-	$(BUILD_TOOL) -I./ -Wall -Werror -o $(OBJ_DIR)$(EXE_NAME) main.cpp -L$(OBJ_DIR) -l$(SHARED_LIB_NAME)
+	$(BUILD_TOOL) -I./ $(COMPILE_FLAGS) -o $(OBJ_DIR)main.o main.cpp
+	$(BUILD_TOOL) -I./ -Wall -Werror -o $(OBJ_DIR)$(EXE_NAME) $(OBJ_DIR)main.o -L$(OBJ_DIR) -l$(SHARED_LIB_NAME)
                    
 run:
 	$(OBJ_DIR)$(EXE_NAME)
 
-#LD_LIBRARY_PATH=/var/fpwork/bakhvalov/linker/StaticMemberMessUp/obj/              
-#export LD_LIBRARY_PATH  
+#LD_LIBRARY_PATH=/var/fpwork/bakhvalov/linker/Unix/obj/
+#export LD_LIBRARY_PATH

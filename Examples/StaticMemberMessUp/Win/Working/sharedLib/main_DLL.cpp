@@ -5,5 +5,5 @@
 EXPORT_IMPORT void main_DLL()   
 {
     Counter c;
-    std::cout << "main_DLL : ptr = " << &c.getCount() << " value = " << c.getCount() << std::endl;
+    std::cout << "main_DLL : ptr = " << &Counter::getCount() << " value = " << Counter::getCount() << std::endl;
 }
