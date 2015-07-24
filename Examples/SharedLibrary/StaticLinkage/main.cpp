@@ -1,6 +1,6 @@
 extern "C"
 {
-    int main_DLL();
+    void main_DLL();
 }
 
 int main()

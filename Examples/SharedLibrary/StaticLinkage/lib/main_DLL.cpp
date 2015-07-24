@@ -1,12 +1,9 @@
-void A();
-void B();
+#include <iostream>
 
 extern "C"
 {
-    int main_DLL()	
+    void main_DLL()	
     {
-        A();
-        B();
-        return 0;
+        std::cout << "this is main_Dll() from shared library" << std::endl;
     }
 }

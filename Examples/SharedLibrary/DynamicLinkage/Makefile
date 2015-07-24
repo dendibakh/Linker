@@ -38,5 +38,5 @@ executable:
 run:
 	$(OBJ_DIR)$(EXE_NAME)
 	
-	#LD_LIBRARY_PATH=/var/fpwork/bakhvalov/linker/SharedLibraryDynamicLinkage/obj/              
+	#LD_LIBRARY_PATH=/var/fpwork/bakhvalov/linker/DynamicLinkage/obj/              
 	#export LD_LIBRARY_PATH  

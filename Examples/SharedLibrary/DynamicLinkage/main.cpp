@@ -7,5 +7,4 @@ int main()
     funPtr fun = (funPtr)dlsym(handle,"main_DLL");
     (*fun)();
     dlclose(handle);
-    
 }     
