@@ -1,0 +1,103 @@
+1. objdump -d
+First look at the main_DLL():
+
+0000000000000980 <_Z8main_DLLv>:
+ 980:	55                   	push   %rbp
+ 981:	48 89 e5             	mov    %rsp,%rbp
+ 984:	53                   	push   %rbx
+ 985:	48 83 ec 08          	sub    $0x8,%rsp
+
+ // Here we see that this symbol is refering to dynamic symbol. It's address will be in GOT (global offset table).
+ 989:	48 8b 05 a8 03 20 00 	mov    2098088(%rip),%rax        # 200d38 <_DYNAMIC+0x1c8>  
+
+
+ 990:	8b 00                	mov    (%rax),%eax
+ 992:	8d 50 01             	lea    0x1(%rax),%edx
+ 995:	48 8b 05 9c 03 20 00 	mov    2098076(%rip),%rax        # 200d38 <_DYNAMIC+0x1c8>
+ 99c:	89 10                	mov    %edx,(%rax)
+ 99e:	48 8b 05 93 03 20 00 	mov    2098067(%rip),%rax        # 200d38 <_DYNAMIC+0x1c8>
+ 9a5:	8b 18                	mov    (%rax),%ebx
+ 9a7:	48 8d 35 98 00 00 00 	lea    152(%rip),%rsi        # a46 <_fini+0xe>
+ 9ae:	48 8b 3d 8b 03 20 00 	mov    2098059(%rip),%rdi        # 200d40 <_DYNAMIC+0x1d0>
+ 9b5:	e8 3e fe ff ff       	callq  7f8 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+ 9ba:	48 89 c7             	mov    %rax,%rdi
+ 9bd:	48 8b 35 74 03 20 00 	mov    2098036(%rip),%rsi        # 200d38 <_DYNAMIC+0x1c8>
+ 9c4:	e8 3f fe ff ff       	callq  808 <_ZNSolsEPKv@plt>
+ 9c9:	48 89 c7             	mov    %rax,%rdi
+ 9cc:	48 8d 35 85 00 00 00 	lea    133(%rip),%rsi        # a58 <_fini+0x20>
+ 9d3:	e8 20 fe ff ff       	callq  7f8 <_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc@plt>
+ 9d8:	48 89 c7             	mov    %rax,%rdi
+ 9db:	89 de                	mov    %ebx,%esi
+ 9dd:	e8 d6 fd ff ff       	callq  7b8 <_ZNSolsEi@plt>
+ 9e2:	48 89 c7             	mov    %rax,%rdi
+ 9e5:	48 8b 35 64 03 20 00 	mov    2098020(%rip),%rsi        # 200d50 <_DYNAMIC+0x1e0>
+ 9ec:	e8 37 fe ff ff       	callq  828 <_ZNSolsEPFRSoS_E@plt>
+ 9f1:	48 83 c4 08          	add    $0x8,%rsp
+ 9f5:	5b                   	pop    %rbx
+ 9f6:	c9                   	leaveq 
+ 9f7:	c3                   	retq   
+ 9f8:	90                   	nop    
+ 9f9:	90                   	nop    
+ 9fa:	90                   	nop    
+ 9fb:	90                   	nop    
+ 9fc:	90                   	nop    
+ 9fd:	90                   	nop    
+ 9fe:	90                   	nop    
+ 9ff:	90                   	nop    
+
+2. objdump -s
+
+When the loader will load shared library it will place this section in exe process memory map and will fill it properly.
+So, next time process will go first to 0x200d38. From here it will know the absolute address of "counter" from exe process.
+
+Contents of section .got:
+ 200d20 00000000 00000000 00000000 00000000  ................
+ 200d30 00000000 00000000 00000000 00000000  ................  // We are interesting in 0x200d38 address.
+ 200d40 00000000 00000000 680b2000 00000000  ........h. .....
+ 200d50 00000000 00000000                    ........        
+
+3. readelf -a -t
+
+This table specify the hint for the loader for resolving all dynamic symbols.
+Generally, loader has everything it should do after loading shared library and do address translation.
+
+Relocation section '.rela.dyn' at offset 0x5e0 contains 10 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000200b40  000000000008 R_X86_64_RELATIVE                    0000000000000950
+000000200b68  000000000008 R_X86_64_RELATIVE                    0000000000200b68
+000000200d48  000000000008 R_X86_64_RELATIVE                    0000000000200b68
+000000200d20  000300000006 R_X86_64_GLOB_DAT 0000000000000000 __gmon_start__ + 0
+000000200d28  000400000006 R_X86_64_GLOB_DAT 0000000000000000 _Jv_RegisterClasses + 0
+000000200d30  000a00000006 R_X86_64_GLOB_DAT 0000000000000000 __cxa_finalize + 0
+000000200d38  000b00000006 R_X86_64_GLOB_DAT 0000000000000000 counter + 0
+000000200d40  000c00000006 R_X86_64_GLOB_DAT 0000000000000000 _ZSt4cout + 0
+000000200d50  000e00000006 R_X86_64_GLOB_DAT 0000000000000000 _ZSt4endlIcSt11char_tr + 0
+000000200db0  000f00000001 R_X86_64_64       0000000000000000 __gxx_personality_v0 + 0
+
+4. In my understanding those are all unresolved by the linker sumbols. I.e. symbols which should be shared between different processes, so should have absolute addresses.
+
+   Symbol table '.dynsym' contains 22 entries:
+
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000790     0 SECTION LOCAL  DEFAULT    8 
+     2: 0000000000000000   546 FUNC    GLOBAL DEFAULT  UND _ZNSolsEi@GLIBCXX_3.4 (2)
+     3: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     4: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _Jv_RegisterClasses
+     5: 0000000000000000  1942 FUNC    GLOBAL DEFAULT  UND _ZNSt8ios_base4InitC1Ev@GLIBCXX_3.4 (2)
+     6: 0000000000000000    94 FUNC    GLOBAL DEFAULT  UND __cxa_atexit@GLIBC_2.2.5 (3)
+     7: 0000000000000000   124 FUNC    GLOBAL DEFAULT  UND _ZNSt8ios_base4InitD1Ev@GLIBCXX_3.4 (2)
+     8: 0000000000000000   650 FUNC    GLOBAL DEFAULT  UND _ZStlsISt11char_traitsIcE@GLIBCXX_3.4 (2)
+     9: 0000000000000000   505 FUNC    GLOBAL DEFAULT  UND _ZNSolsEPKv@GLIBCXX_3.4 (2)
+    10: 0000000000000000   294 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)
+    11: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND counter
+    12: 0000000000000000   272 OBJECT  GLOBAL DEFAULT  UND _ZSt4cout@GLIBCXX_3.4 (2)
+    13: 0000000000000000     6 FUNC    GLOBAL DEFAULT  UND _ZNSolsEPFRSoS_E@GLIBCXX_3.4 (2)
+    14: 0000000000000000    41 FUNC    GLOBAL DEFAULT  UND _ZSt4endlIcSt11char_trait@GLIBCXX_3.4 (2)
+    15: 0000000000000000  1182 FUNC    GLOBAL DEFAULT  UND __gxx_personality_v0@CXXABI_1.3 (4)
+    16: 0000000000000980   120 FUNC    GLOBAL DEFAULT   10 _Z8main_DLLv
+    17: 0000000000200dc8     0 NOTYPE  GLOBAL DEFAULT  ABS _end
+    18: 0000000000200db8     0 NOTYPE  GLOBAL DEFAULT  ABS _edata
+    19: 0000000000200db8     0 NOTYPE  GLOBAL DEFAULT  ABS __bss_start
+    20: 0000000000000790     0 FUNC    GLOBAL DEFAULT    8 _init
+    21: 0000000000000a38     0 FUNC    GLOBAL DEFAULT   11 _fini
